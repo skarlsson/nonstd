@@ -8,6 +8,7 @@ TEST(decimal_test, container) {
   using decimal52 = decimal<int16_t, 5, 2>;
   using decimal94 = decimal<int32_t, 9, 4>;
   using decimal174 = decimal<int64_t, 17, 4>;
+  using decimal188 = decimal<int128_t, 18, 8>;
 
   double eps = 10.0 * std::numeric_limits<double>::epsilon();
   {
@@ -60,14 +61,32 @@ TEST(decimal_test, container) {
     EXPECT_EQ((abs((double) 3.14 - (double) pi2) <= eps), true);
   }
 
-  // multiply
+  // multiply decimal94
   {
     decimal94 pi = decimal94(3.14);
     EXPECT_EQ((pi * pi ==  decimal94(9.8596)), true);
     EXPECT_EQ((pi * 2.5 ==  decimal94(7.85)), true);
   }
 
-  // division
+  // multiply decimal174
+  {
+    decimal174 pi = decimal174(3.14);
+    EXPECT_EQ((pi * pi ==  decimal174(9.8596)), true);
+    EXPECT_EQ((pi * 2.5 ==  decimal174(7.85)), true);
+  }
+
+  // multiply decimal188
+  {
+    decimal188 pi = decimal188(3.14);
+    EXPECT_EQ((pi * pi ==  decimal188(9.8596)), true);
+    EXPECT_EQ((pi * 2.5 ==  decimal188(7.85)), true);
+  }
+
+
+
+
+
+  // division decimal94
   {
     decimal94 pi = decimal94(3.14);
     decimal94 x = decimal94(1.43);
@@ -75,6 +94,27 @@ TEST(decimal_test, container) {
     EXPECT_EQ((pi / x ==  decimal94(2.1958)), true);
     EXPECT_EQ((pi / 1.43 ==  decimal94(2.1958)), true);
   }
+
+  // division decimal174
+  {
+    decimal174 pi = decimal174(3.14);
+    decimal174 x = decimal174(1.43);
+    EXPECT_EQ((pi / pi ==  decimal174(1.0000)), true);
+    EXPECT_EQ((pi / x ==  decimal174(2.1958)), true);
+    EXPECT_EQ((pi / 1.43 ==  decimal174(2.1958)), true);
+  }
+
+  // division decimal188
+  {
+    decimal188 pi = decimal188(3.14);
+    decimal188 x = decimal188(1.43);
+    EXPECT_EQ((pi / pi ==  decimal188(1.0000)), true);
+    EXPECT_EQ((pi / x ==  decimal188(2.19580419)), true);
+    EXPECT_EQ((pi / 1.43 ==  decimal188(2.19580419)), true);
+  }
+
+
+
   }
 
 int main(int argc, char **argv) {
