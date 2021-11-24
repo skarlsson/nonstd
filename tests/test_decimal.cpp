@@ -59,7 +59,23 @@ TEST(decimal_test, container) {
     decimal94 pi2 = (decimal94) pi;
     EXPECT_EQ((abs((double) 3.14 - (double) pi2) <= eps), true);
   }
-}
+
+  // multiply
+  {
+    decimal94 pi = decimal94(3.14);
+    EXPECT_EQ((pi * pi ==  decimal94(9.8596)), true);
+    EXPECT_EQ((pi * 2.5 ==  decimal94(7.85)), true);
+  }
+
+  // division
+  {
+    decimal94 pi = decimal94(3.14);
+    decimal94 x = decimal94(1.43);
+    EXPECT_EQ((pi / pi ==  decimal94(1.0000)), true);
+    EXPECT_EQ((pi / x ==  decimal94(2.1958)), true);
+    EXPECT_EQ((pi / 1.43 ==  decimal94(2.1958)), true);
+  }
+  }
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
