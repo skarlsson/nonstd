@@ -64,12 +64,17 @@ namespace nonstd {
     int64_t value_ = 0;
   };
 
-
   class utc_ns_since_epoch_t {
   public:
     constexpr inline utc_ns_since_epoch_t() = default;
 
     inline ~utc_ns_since_epoch_t() = default;
+
+    static inline nonstd::utc_ns_since_epoch_t now() {
+      return nonstd::utc_ns_since_epoch_t(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                              std::chrono::system_clock::now().time_since_epoch())
+                                              .count());
+    }
 
     constexpr inline explicit utc_ns_since_epoch_t(int64_t ts) : value_(ts) {}
 
@@ -119,6 +124,10 @@ namespace nonstd {
     constexpr inline utc_ns_since_epoch_t &operator-=(ns_duration_t duration) {
       value_ -= duration.value();
       return *this;
+    }
+
+    constexpr inline ns_duration_t operator-(const utc_ns_since_epoch_t& b) const {
+      return ns_duration_t(value_ - b.value_);
     }
 
     constexpr inline int64_t value() const { return value_; }
@@ -185,6 +194,9 @@ namespace nonstd {
       return *this;
     }
 
+    constexpr inline ns_duration_t operator-(const localtime_ns_since_midnight_t& b) const {
+      return ns_duration_t(value_ - b.value_);
+    }
 
     constexpr inline int64_t value() const { return value_; }
 
