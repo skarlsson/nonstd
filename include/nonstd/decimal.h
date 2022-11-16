@@ -22,16 +22,6 @@
 // MAXDEC18 999999999999999999
 // MAXDEC188 9999999999.99999999
 
-/*
-template <typename T>
-inline constexpr bool Is_Int32 = std::is_same_v<T, int32_t>;
-
-template <typename T>
-inline constexpr bool Is_Int64 = std::is_same_v<T, int64_t>;
-
-template <typename T>
-inline constexpr bool Is_Int128 = std::is_same_v<T, int128_t>;
-*/
 namespace nonstd {
 template <typename T>
 inline constexpr bool Is_ValidINT =
@@ -74,8 +64,6 @@ private:
       : value_(raw_value) {}
 
 public:
-  // typedef typename std::make_unsigned<INTEGER_TYPE>::type
-  // UNSIGNED_INTEGER_TYPE;
   constexpr explicit inline decimal() : value_(0) {}
 
   constexpr explicit inline decimal(double v)
